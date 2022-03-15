@@ -2,7 +2,7 @@
 <template>
 <div class="container">
 
- <el-form :model="ruleForm" status-icon label-width="80px">
+ <el-form :model="ruleForm" status-icon label-width="80px" :rules="rules">
      <img :src="loginPng" alt="">
   <el-form-item label="用户名" prop="username">
     <el-input type="username" v-model="ruleForm.username" autocomplete="off" placeholder="请输入用户名"></el-input>
@@ -31,7 +31,18 @@ export default {
             password:'',
             username:'',
           },
-          loginPng
+          loginPng,
+          rules: {
+          password: [
+            { required: true, message: '请输入密码', trigger: 'blur' },
+            { min: 3, max: 12, message: '长度在 3 到 12 个字符', trigger: 'blur' }
+          ],
+          username: [
+            { required: true, message: '请输入用户名', trigger: 'blur' },
+            { min: 3, max: 8, message: '长度在 3 到 8 个字符', trigger: 'blur' }
+          ],
+
+        }
 
         };
     },

@@ -1,15 +1,27 @@
 <template>
   <div id="app">
-    <div id="nav">
-      <el-button plain>朴素按钮</el-button>
+    <Login/>
 
-  </div>
   </div>
 </template>
+<script>
+import Login from './components/Login.vue';
+  export default {
+    components:{
+      Login
+    }
+  };
+</script>
 
 <style lang="less">
-#app {
- background-color: pink;
+* {
+  margin:0;
+  padding:0;
 }
+html,body,#app {
+  width:100%;
+  height:100%;
+}
+
 
 </style>

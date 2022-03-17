@@ -2,7 +2,7 @@
 <template>
 <div class="container">
 
- <el-form :model="ruleForm" status-icon label-width="80px" :rules="rules">
+ <el-form :model="ruleForm" status-icon label-width="80px" :rules="rules" ref="ruleForm">
      <img :src="loginPng" alt="">
   <el-form-item label="用户名" prop="username">
     <el-input type="username" v-model="ruleForm.username" autocomplete="off" placeholder="请输入用户名"></el-input>
@@ -48,7 +48,12 @@ export default {
     },
     methods:{
       submitForm(){},
-      resetForm(){}
+      resetForm(){
+        console.log('重置');
+        // * 使用了refs就必须给组件ref的属性
+        this.$refs.ruleForm.resetFields();
+
+      }
 
     },
     //生命周期 - 创建完成（访问当前this实例）

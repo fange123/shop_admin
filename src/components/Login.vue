@@ -47,7 +47,16 @@ export default {
         };
     },
     methods:{
-      submitForm(){},
+      submitForm(){
+        this.$refs.ruleForm.validate((valid)=>{
+          if(valid){
+            console.log('校验成功');
+
+          }else{
+            console.error('校验没通过');
+          }
+        });
+      },
       resetForm(){
         console.log('重置');
         // * 使用了refs就必须给组件ref的属性

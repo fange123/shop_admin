@@ -54,11 +54,14 @@ export default {
           axios.get('http://localhost:3000/login',{params: this.form}).then(res=>{
               const {status,msg} = res.data.meta;
               if(status === 200){
-                console.log('登录成功',msg);
+                this.$message({ message: msg, type: 'success' ,duration:2000});
+              }else{
+                this.$message.error(err);
               }
 
             }).catch(err=>{
               console.log(err);
+
             });
         });
       },

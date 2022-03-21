@@ -54,7 +54,8 @@ export default {
           axios.get('http://localhost:3000/login',{params: this.form}).then(res=>{
               const {status,msg} = res.data.meta;
               if(status === 200){
-                this.$message({ message: msg, type: 'success' ,duration:2000});
+                this.$message({ message: msg, type: 'success' ,duration:1000});
+                this.$router.push('/');
               }else{
                 this.$message.error(err);
               }

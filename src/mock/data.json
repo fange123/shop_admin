@@ -1,0 +1,16 @@
+{
+  "login": {
+    "data": {
+      "id": 500,
+      "rid": 0,
+      "username": "admin",
+      "mobile": "123",
+      "email": "123@qq.com",
+      "token": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6I......"
+    },
+    "meta": {
+      "msg": "登录成功",
+      "status": 200
+    }
+  }
+}

@@ -23,6 +23,7 @@
 
 <script>
 import loginPng from '../assets/images/1.jpeg';
+import axios from 'axios';
 export default {
     name:'Login',
     data() {
@@ -49,12 +50,16 @@ export default {
     methods:{
       submitForm(){
         this.$refs.ruleForm.validate((valid)=>{
-          if(valid){
-            console.log('校验成功');
+          if(!valid) return;
+          axios.get('http://localhost:3000/login',{params: this.form}).then(res=>{
+              const {status,msg} = res.data.meta;
+              if(status === 200){
+                console.log('登录成功',msg);
+              }
 
-          }else{
-            console.error('校验没通过');
-          }
+            }).catch(err=>{
+              console.log(err);
+            });
         });
       },
       resetForm(){

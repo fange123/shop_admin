@@ -52,10 +52,11 @@ export default {
         this.$refs.ruleForm.validate((valid)=>{
           if(!valid) return;
           axios.get('http://localhost:3000/login',{params: this.form}).then(res=>{
-              const {status,msg} = res.data.meta;
+              const {meta:{ status, msg },data:{token}} = res.data;
               if(status === 200){
                 this.$message({ message: msg, type: 'success' ,duration:1000});
                 this.$router.push('/');
+                localStorage.setItem('token',token);
               }else{
                 this.$message.error(err);
               }

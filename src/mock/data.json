@@ -28,7 +28,21 @@
           "create_time": "2017-11-09T20:36:26.000Z",
           "modify_time": null,
           "is_delete": false,
-          "is_active": false
+          "is_active": false,
+          "mg_state": false
+        },
+        {
+          "id": 20,
+          "username": "fange",
+          "mobile": "18616358651",
+          "type": 1,
+          "openid": "",
+          "email": "fange@163.com",
+          "create_time": "2017-11-09T20:36:26.000Z",
+          "modify_time": null,
+          "is_delete": false,
+          "is_active": false,
+          "mg_state": true
         }
       ]
     },

@@ -2,17 +2,27 @@ import Vue from "vue";
 import VueRouter from "vue-router";
 import Login from "../components/Login.vue";
 import Index from "../components/Index.vue";
+import Users from "../components/Users.vue";
 
 Vue.use(VueRouter);
 
 const routes = [
   {
     path: "/login",
+    name: "login",
     component: Login,
   },
   {
     path: "/",
+    name: "index",
     component: Index,
+    children: [
+      {
+        path: "users",
+        name: "users",
+        component: Users,
+      },
+    ],
   },
 ];
 

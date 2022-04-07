@@ -43,6 +43,18 @@
     </el-table>
 
     <!-- 分页 -->
+    <el-pagination
+      @size-change="handleSizeChange"
+      @current-change="handleCurrentChange"
+      :current-page="pageNum"
+      :page-sizes="[2,4,6,8]"
+      :page-size="pageSize"
+      layout="total, sizes, prev, pager, next, jumper"
+      :total="total"
+      background
+    >
+    </el-pagination>
+
   </div>
 </template>
 
@@ -54,8 +66,9 @@ export default {
         return {
           query:'',
           pageNum:1,
-          pageSize:5,
-          tableData:[]
+          pageSize:2,
+          tableData:[],
+          total:0
         };
     },
     //生命周期 - 创建完成（访问当前this实例）
@@ -80,11 +93,23 @@ export default {
           const {data,meta:{status}} = res.data;
           if(status === 200){
             this.tableData = data.users;
+            this.total = data.total;
           }
 
         });
 
-      }
+      },
+
+      handleSizeChange(val) { console.log(`每页 ${val} 条`);
+        this.pageSize = val;
+        this.getUserList();
+      },
+
+      handleCurrentChange(val) {
+        this.pageNum = val;
+        this.getUserList();
+       }
+
 
     },
     //生命周期 - 挂载完成（访问DOM元素）
@@ -94,7 +119,6 @@ export default {
 };
 </script>
 <style lang="less" scoped>
-.users {
-}
+
 
 </style>

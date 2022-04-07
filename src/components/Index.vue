@@ -1,7 +1,11 @@
 <template>
      <el-container class="index">
       <el-header>
-        <div class="logo"></div>
+        <div class="logo">
+          <img :src="require('../assets/images/1.jpeg')" alt="" :style="{width:'50px',height:'50px',borderRadius:'50%'}">
+          <h4>梵歌Love</h4>
+
+        </div>
         <div class="title">
           <h1>电商管理系统</h1>
         </div>
@@ -96,9 +100,12 @@ export default {
     height:60px;
     line-height: 60px;
     .logo {
-      width:180px;
-      background: url('../assets/images/logo.png') no-repeat center center / contain;
-
+      width:140px;
+      padding:0 20px;
+      background:#ccc;
+      display: flex;
+      align-items: center;
+      justify-content: space-around;
     }
     .title {
       flex:1;

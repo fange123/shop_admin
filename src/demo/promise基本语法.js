@@ -54,19 +54,52 @@ const p4 = new Promise((resolve, reject) => {
 //todo: 如何使用一个promise呢
 //# .then方法：promise对象处于成功的状态是时候，需要传入一个回调函数，这个回调函数就是resolve
 //* promise可以避免回调地狱，但是有链式编程
-p1.then((res) => {
-  console.log(res);
-  return p2;
-})
+// p1.then((res) => {
+//   console.log(res);
+//   return p2;
+// })
+//   .then((res) => {
+//     console.log(res);
+//     return p3;
+//   })
+//   .then((res) => {
+//     console.log(res);
+//     return p4;
+//   })
+//   .then((res) => {
+//     console.log(res);
+//   })
+//   .catch((err) => console.log(err));
+
+//* 可以把读取操作小小的封装一下，不要每次都重复操作
+function readFile(filename) {
+  return new Promise((resolve, reject) => {
+    fs.readFile(filename, "utf8", (err, data) => {
+      if (err) {
+        reject(err);
+      } else {
+        resolve(data);
+      }
+    });
+  });
+}
+
+readFile("a.txt")
   .then((res) => {
     console.log(res);
-    return p3;
+    return readFile("b.txt");
   })
   .then((res) => {
     console.log(res);
-    return p4;
+    return readFile("c.txt");
+  })
+  .then((res) => {
+    console.log(res);
+    return readFile("d.txt");
   })
   .then((res) => {
     console.log(res);
   })
-  .catch((err) => console.log(err));
+  .catch((err) => {
+    console.log(err);
+  });

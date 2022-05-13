@@ -1,7 +1,20 @@
 <template>
   <div class="users">
     <!-- 面包屑 -->
+    <el-breadcrumb separator-class="el-icon-arrow-right">
+    <el-breadcrumb-item :to="{ path: '/' }">首页</el-breadcrumb-item>
+    <el-breadcrumb-item>用户管理</el-breadcrumb-item>
+    <el-breadcrumb-item>用户列表</el-breadcrumb-item>
+  </el-breadcrumb>
     <!-- 搜索框 -->
+    <div class="input_wrap">
+      <el-input placeholder="请输入搜索关键字" v-model="query" class="input-with-select">
+      <el-button slot="append" icon="el-icon-search" @click="searchUser"></el-button>
+    </el-input>
+    <el-button plain type="success">添加用户</el-button>
+
+
+    </div>
     <!-- 表格 -->
     <el-table :data="tableData" style="width: 100%">
       <el-table-column
@@ -137,6 +150,11 @@ export default {
           });
         });
 
+       },
+       searchUser(){
+         //搜索时要重新显示第一页
+         this.pageNum = 1;
+         this.getUserList();
        }
 
 
@@ -148,6 +166,18 @@ export default {
 };
 </script>
 <style lang="less" scoped>
+.el-breadcrumb {
+  height:40px;
+  line-height: 40px;
+}
+.input_wrap {
+  margin:10px 0;
+  .el-input {
+    width:300px;
+    margin-right: 20px;
+
+  }
+}
 
 
 </style>

@@ -32,7 +32,7 @@
       <el-table-column label="操作" width="300">
          <template v-slot:default="scope">
            <el-button type="primary" plain icon="el-icon-edit" circle size="small"></el-button>
-           <el-button type="danger" plain icon="el-icon-delete" circle size="small"></el-button>
+           <el-button type="danger" plain icon="el-icon-delete" circle size="small" @click="delUser(scope.row.id)"></el-button>
             <el-button type="success" plain icon="el-icon-check" round size="small">分配角色</el-button>
 
 
@@ -108,6 +108,43 @@ export default {
       handleCurrentChange(val) {
         this.pageNum = val;
         this.getUserList();
+       },
+
+       delUser(id){
+         this.$confirm('此操作将永久删除该文件, 是否继续?', '提示', {
+          confirmButtonText: '确定',
+          cancelButtonText: '取消',
+          type: 'warning'
+        }).then(() => {
+          axios.delete(`http://localhost:3000/userList/${id}`,{
+             //* 请求必须带token
+          headers:{
+            Authorization:localStorage.getItem('token')
+          }
+          }).then(res=>{
+            const {meta:{ status,msg}} = res.data;
+            if(status == 200){
+              this.$message({
+                type: 'success',
+                message: '删除成功!'
+              });
+              // !: 如果当前页面的数据只剩一条了，那么删除之后应该页码数减1
+              if(this.tableData.length === 1 && this.pageNum > 1){
+                this.pageNum --;
+              }
+              this.getUserList();
+            }else{
+              this.$message.error(msg);
+            }
+          });
+
+        }).catch(() => {
+          this.$message({
+            type: 'info',
+            message: '已取消删除'
+          });
+        });
+
        }
 
 

@@ -1,7 +1,9 @@
 <template>
      <el-container class="index">
       <el-header>
-        <div class="logo"></div>
+        <div class="logo_wrap">
+            <div class="logo"></div>
+        </div>
         <div class="title">
           <h1>电商管理系统</h1>
         </div>
@@ -97,9 +99,18 @@ export default {
     display: flex;
     height:60px;
     line-height: 60px;
+    .logo_wrap {
+      width:179px;
+      line-height: 60px;
+      background-color:#616367;
+    }
     .logo {
-      width:180px;
-      background: url('../assets/images/logo.png') no-repeat center center / contain;
+      margin:auto;
+      margin-top:5px;
+      width:50px;
+      height:50px;
+      border-radius:50%;
+      background: url('../assets/images/1.jpeg') no-repeat center center / contain;
 
     }
     .title {

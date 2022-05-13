@@ -79,7 +79,7 @@ export default {
 
     methods: {
       getUserList(){
-        this.$axios.get('http://localhost:3000/userList',{
+        this.$axios.get('/userList',{
           params: {
             query:this.query,
             pageNum:this.pageNum,
@@ -116,7 +116,7 @@ export default {
           cancelButtonText: '取消',
           type: 'warning'
         }).then(() => {
-          this.$axios.delete(`http://localhost:3000/userList/${id}`,{
+          this.$axios.delete(`/userList/${id}`,{
              //* 请求必须带token
           headers:{
             Authorization:localStorage.getItem('token')

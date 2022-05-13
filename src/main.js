@@ -10,6 +10,7 @@ Vue.use(ElementUI);
 
 // # 把axios挂载到vue原型上
 Vue.prototype.$axios = axios;
+axios.defaults.baseURL = "http://localhost:3000";
 
 new Vue({
   router,

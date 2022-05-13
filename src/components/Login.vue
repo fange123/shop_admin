@@ -52,7 +52,7 @@ export default {
         this.$refs.ruleForm.validate((valid)=>{
           if(!valid) return;
           this.$axios.get('/login',{params: this.form}).then(res=>{
-              const {meta:{ status, msg },data} = res.data;
+              const {meta:{ status, msg },data} = res;
               if(status === 200){
                 this.$message({ message: msg, type: 'success' ,duration:1000});
                 localStorage.setItem('token',data.token);

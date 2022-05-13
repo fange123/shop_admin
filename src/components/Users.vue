@@ -87,7 +87,7 @@ export default {
           },
 
         }).then(res=> {
-          const {data,meta:{status}} = res.data;
+          const {data,meta:{status}} = res;
           if(status === 200){
             this.tableData = data.users;
             this.total = data.total;
@@ -114,7 +114,7 @@ export default {
           type: 'warning'
         }).then(() => {
           this.$axios.delete(`/userList/${id}`).then(res=>{
-            const {meta:{ status,msg}} = res.data;
+            const {meta:{ status,msg}} = res;
             if(status == 200){
               this.$message({
                 type: 'success',

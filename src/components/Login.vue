@@ -48,11 +48,11 @@ export default {
         };
     },
     methods:{
-      submitForm(){
-        this.$refs.ruleForm.validate((valid)=>{
-          if(!valid) return;
-          this.$axios.get('/login',{params: this.form}).then(res=>{
-              const {meta:{ status, msg },data} = res;
+      async submitForm(){
+      try {
+          await this.$refs.ruleForm.validate();
+          const res = await this.$axios.get('/login',{params: this.form});
+          const {meta:{ status, msg },data} = res;
               if(status === 200){
                 this.$message({ message: msg, type: 'success' ,duration:1000});
                 localStorage.setItem('token',data.token);
@@ -62,11 +62,9 @@ export default {
                 this.$message.error(err);
               }
 
-            }).catch(err=>{
-              console.log(err);
-
-            });
-        });
+      }catch(e){
+        console.log(e);
+      }
       },
       resetForm(){
         console.log('重置');

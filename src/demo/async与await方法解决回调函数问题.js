@@ -1,4 +1,3 @@
-const { log } = require("console");
 const fs = require("fs");
 // * async和await是es7推出的新语法，也是用来处理异步代码的
 //*  async 和 await 是一对关键字

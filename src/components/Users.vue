@@ -91,22 +91,26 @@ export default {
     },
 
     methods: {
-      getUserList(){
-        this.$axios.get('/userList',{
-          params: {
-            query:this.query,
-            pageNum:this.pageNum,
-            pageSize:this.pageSize,
-          },
+      async getUserList(){
+        try{
+           const res =  await this.$axios.get('/userList',{
+            params: {
+              query:this.query,
+              pageNum:this.pageNum,
+              pageSize:this.pageSize,
+            },
 
-        }).then(res=> {
+        });
+        console.log(res);
           const {data,meta:{status}} = res;
           if(status === 200){
             this.tableData = data.users;
             this.total = data.total;
           }
 
-        });
+        }catch(e){
+          console.log(e);
+        }
 
       },
 
@@ -120,13 +124,14 @@ export default {
         this.getUserList();
        },
 
-       delUser(id){
-         this.$confirm('此操作将永久删除该文件, 是否继续?', '提示', {
-          confirmButtonText: '确定',
-          cancelButtonText: '取消',
-          type: 'warning'
-        }).then(() => {
-          this.$axios.delete(`/userList/${id}`).then(res=>{
+       async delUser(id){
+         try {
+            await this.$confirm('此操作将永久删除该文件, 是否继续?', '提示', {
+            confirmButtonText: '确定',
+            cancelButtonText: '取消',
+            type: 'warning'
+          });
+            const res =  await this.$axios.delete(`/userList/${id}`);
             const {meta:{ status,msg}} = res;
             if(status == 200){
               this.$message({
@@ -141,14 +146,13 @@ export default {
             }else{
               this.$message.error(msg);
             }
-          });
 
-        }).catch(() => {
-          this.$message({
+         }catch(e){
+            this.$message({
             type: 'info',
             message: '已取消删除'
           });
-        });
+         }
 
        },
        searchUser(){
@@ -156,20 +160,22 @@ export default {
          this.pageNum = 1;
          this.getUserList();
        },
-       changeState(row){
-         this.$axios.put(`/getUserList/${row.id}`,{
+       async changeState(row){
+       try{
+          const res = await this.$axios.put(`/getUserList/${row.id}`,{
           data:{
             mg_state:row.mg_state
-
           }
-         }).then(res=> {
-           if(res.msg.status === 200){
+         });
+          if(res.msg.status === 200){
              this.$message.success = '修改成功';
            }else{
              this.$message.error = '修改失败';
 
            }
-         });
+       }catch(e){
+         console.log(e);
+       }
        }
 
 

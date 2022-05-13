@@ -23,7 +23,7 @@
 
 <script>
 import loginPng from '../assets/images/1.jpeg';
-import axios from 'axios';
+
 export default {
     name:'Login',
     data() {
@@ -51,7 +51,7 @@ export default {
       submitForm(){
         this.$refs.ruleForm.validate((valid)=>{
           if(!valid) return;
-          axios.get('http://localhost:3000/login',{params: this.form}).then(res=>{
+          this.$axios.get('http://localhost:3000/login',{params: this.form}).then(res=>{
               const {meta:{ status, msg },data} = res.data;
               if(status === 200){
                 this.$message({ message: msg, type: 'success' ,duration:1000});

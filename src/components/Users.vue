@@ -59,7 +59,7 @@
 </template>
 
 <script>
-import axios from 'axios';
+
 export default {
     name:'Users',
     data() {
@@ -79,7 +79,7 @@ export default {
 
     methods: {
       getUserList(){
-        axios.get('http://localhost:3000/userList',{
+        this.$axios.get('http://localhost:3000/userList',{
           params: {
             query:this.query,
             pageNum:this.pageNum,
@@ -116,7 +116,7 @@ export default {
           cancelButtonText: '取消',
           type: 'warning'
         }).then(() => {
-          axios.delete(`http://localhost:3000/userList/${id}`,{
+          this.$axios.delete(`http://localhost:3000/userList/${id}`,{
              //* 请求必须带token
           headers:{
             Authorization:localStorage.getItem('token')

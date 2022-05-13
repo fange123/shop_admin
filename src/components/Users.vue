@@ -33,7 +33,7 @@
         label="用户状态">
         <!-- TODO:默认插槽，新写法 -->
          <template v-slot:default="scope">
-           <el-switch v-model="scope.row.mg_state" active-color="#13ce66" inactive-color="#ff4949">
+           <el-switch v-model="scope.row.mg_state" active-color="#13ce66" inactive-color="#ff4949" @change="changeState(scope.row)">
           </el-switch>
          </template>
 
@@ -155,6 +155,21 @@ export default {
          //搜索时要重新显示第一页
          this.pageNum = 1;
          this.getUserList();
+       },
+       changeState(row){
+         this.$axios.put(`/getUserList/${row.id}`,{
+          data:{
+            mg_state:row.mg_state
+
+          }
+         }).then(res=> {
+           if(res.msg.status === 200){
+             this.$message.success = '修改成功';
+           }else{
+             this.$message.error = '修改失败';
+
+           }
+         });
        }
 
 

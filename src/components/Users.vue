@@ -85,10 +85,7 @@ export default {
             pageNum:this.pageNum,
             pageSize:this.pageSize,
           },
-          //* 请求必须带token
-          headers:{
-            Authorization:localStorage.getItem('token')
-          }
+
         }).then(res=> {
           const {data,meta:{status}} = res.data;
           if(status === 200){
@@ -116,12 +113,7 @@ export default {
           cancelButtonText: '取消',
           type: 'warning'
         }).then(() => {
-          this.$axios.delete(`/userList/${id}`,{
-             //* 请求必须带token
-          headers:{
-            Authorization:localStorage.getItem('token')
-          }
-          }).then(res=>{
+          this.$axios.delete(`/userList/${id}`).then(res=>{
             const {meta:{ status,msg}} = res.data;
             if(status == 200){
               this.$message({

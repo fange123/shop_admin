@@ -44,7 +44,7 @@
       </el-table-column>
       <el-table-column label="操作" width="300">
          <template v-slot:default="scope">
-           <el-button type="primary" plain icon="el-icon-edit" circle size="small"></el-button>
+           <el-button type="primary" plain icon="el-icon-edit" circle size="small" @click="showEdit(scope.row)"></el-button>
            <el-button type="danger" plain icon="el-icon-delete" circle size="small" @click="delUser(scope.row.id)"></el-button>
             <el-button type="success" plain icon="el-icon-check" round size="small">分配角色</el-button>
 
@@ -67,6 +67,26 @@
       background
     >
     </el-pagination>
+    <el-dialog
+      title="编辑用户"
+      :visible.sync="editVisible"
+      width="40%">
+      <el-form label-width="80px" :model="editForm"  status-icon :rules="rules" ref="editForm">
+         <el-form-item label="用户名" >
+         <el-tag type="info">{{editForm.username}}</el-tag>
+        </el-form-item>
+         <el-form-item label="邮箱" prop="email">
+          <el-input v-model="editForm.email" placeholder="请输入邮箱"></el-input>
+        </el-form-item>
+         <el-form-item label="手机号" prop="mobile">
+          <el-input v-model="editForm.mobile" placeholder="请输入手机号"></el-input>
+        </el-form-item>
+      </el-form>
+      <span slot="footer" class="dialog-footer">
+        <el-button @click="editVisible = false">取 消</el-button>
+        <el-button type="primary" @click="editUser">确 定</el-button>
+      </span>
+    </el-dialog>
     <el-dialog
       title="添加用户"
       :visible.sync="addVisible"
@@ -106,9 +126,16 @@ export default {
           tableData:[],
           total:0,
           addVisible:false,
+          editVisible:false,
           form:{
             username:'',
             password:'',
+            email:'',
+            mobile:''
+          },
+          editForm:{
+            id:'',
+            username:'',
             email:'',
             mobile:''
           },
@@ -248,6 +275,39 @@ export default {
          }catch(e){
            console.log(e);
          }
+
+       },
+
+       showEdit(form){
+         const {username,email,mobile,id} = form;
+         //!: 编辑的时候，需要在显示弹框的时候回显出内容
+         this.editVisible = true;
+         this.editForm.username =username;
+         this.editForm.email =email;
+         this.editForm.mobile =mobile;
+         this.editForm.id = id;
+
+       },
+      async editUser(){
+        try {
+          await this.$refs.editForm.validate();
+          //TODO: 提交表单项，最好精确一下提交参数，不要传多余值
+          const {id,username,email,mobile} = this.editForm;
+        const res =  await this.$axios.put(`/users/${id}`,{
+          username,email,mobile
+        });
+        const {status,msg} = res.meta;
+        if(status === 200){
+          this.$message.success(msg);
+          this.editVisible = false;
+          this.$refs.editForm.resetFields();
+          this.getUserList();
+        }else{
+          this.$message.error(msg);
+        }
+        }catch(e){
+          console.log(e);
+        }
 
        }
 

@@ -11,7 +11,7 @@
       <el-input placeholder="请输入搜索关键字" v-model="query" class="input-with-select">
       <el-button slot="append" icon="el-icon-search" @click="searchUser"></el-button>
     </el-input>
-    <el-button plain type="success">添加用户</el-button>
+    <el-button plain type="success" @click="showAddDialog">添加用户</el-button>
 
 
     </div>
@@ -67,6 +67,29 @@
       background
     >
     </el-pagination>
+    <el-dialog
+      title="添加用户"
+      :visible.sync="addVisible"
+      width="40%">
+      <el-form label-width="80px" :model="form"  status-icon :rules="rules" ref="form">
+         <el-form-item label="用户名" prop="username">
+          <el-input v-model="form.username" placeholder="请输入用户名"></el-input>
+        </el-form-item>
+         <el-form-item label="密码" prop="password">
+          <el-input v-model="form.password" placeholder="请输入密码"></el-input>
+        </el-form-item>
+         <el-form-item label="邮箱" prop="email">
+          <el-input v-model="form.email" placeholder="请输入邮箱"></el-input>
+        </el-form-item>
+         <el-form-item label="手机号" prop="mobile">
+          <el-input v-model="form.mobile" placeholder="请输入手机号"></el-input>
+        </el-form-item>
+      </el-form>
+      <span slot="footer" class="dialog-footer">
+        <el-button @click="addVisible = false">取 消</el-button>
+        <el-button type="primary" @click="addUser">确 定</el-button>
+      </span>
+    </el-dialog>
 
   </div>
 </template>
@@ -81,7 +104,32 @@ export default {
           pageNum:1,
           pageSize:2,
           tableData:[],
-          total:0
+          total:0,
+          addVisible:false,
+          form:{
+            username:'',
+            password:'',
+            email:'',
+            mobile:''
+          },
+              rules: {
+                 password: [
+                  { required: true, message: '请输入密码', trigger: ['blur','change'] },
+                  { min: 3, max: 12, message: '长度在 3 到 12 个字符', trigger: ['blur','change'] }
+                ],
+                username: [
+                  { required: true, message: '请输入用户名', trigger: ['blur','change'] },
+                  { min: 3, max: 8, message: '长度在 3 到 8 个字符',trigger: ['blur','change'] }
+                ],
+                email: [
+                   { type: 'email', message: '请输入正确的邮箱地址', trigger: ['blur', 'change'] }
+                ],
+                mobile: [
+                   { pattern: /^1[3-9](\d{9})$/, message: '请输入正确的手机格式', trigger: ['blur', 'change'] }
+                ],
+
+        }
+
         };
     },
     //生命周期 - 创建完成（访问当前this实例）
@@ -101,7 +149,6 @@ export default {
             },
 
         });
-        console.log(res);
           const {data,meta:{status}} = res;
           if(status === 200){
             this.tableData = data.users;
@@ -176,6 +223,32 @@ export default {
        }catch(e){
          console.log(e);
        }
+       },
+       showAddDialog(){
+         this.addVisible = true;
+       },
+       async addUser(){
+         try {
+           await this.$refs.form.validate;
+           const res = await this.$axios.get('/addUserList',{params:this.form});
+           const {meta:{ status, msg }} = res;
+           if(status === 200){
+             this.$message.success(msg);
+            // 重置表单
+            this.$refs.form.resetFields();
+            // 关闭弹窗
+            this.addVisible = false;
+            // 更新列表
+            this.getUserList();
+           }else{
+             this.$message.error('添加失败');
+
+           }
+
+         }catch(e){
+           console.log(e);
+         }
+
        }
 
 

@@ -35,12 +35,12 @@ export default {
           loginPng,
           rules: {
           password: [
-            { required: true, message: '请输入密码', trigger: 'blur' },
-            { min: 3, max: 12, message: '长度在 3 到 12 个字符', trigger: 'blur' }
+            { required: true, message: '请输入密码', trigger: ['blur','change'] },
+            { min: 3, max: 12, message: '长度在 3 到 12 个字符', trigger: ['blur','change'] }
           ],
           username: [
-            { required: true, message: '请输入用户名', trigger: 'blur' },
-            { min: 3, max: 8, message: '长度在 3 到 8 个字符', trigger: 'blur' }
+            { required: true, message: '请输入用户名', trigger: ['blur','change'] },
+            { min: 3, max: 8, message: '长度在 3 到 8 个字符',trigger: ['blur','change'] }
           ],
 
         }

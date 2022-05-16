@@ -7,7 +7,8 @@
   <el-form-item label="用户名" prop="username">
     <el-input type="username" v-model="ruleForm.username" autocomplete="off" placeholder="请输入用户名"></el-input>
   </el-form-item>
-  <el-form-item label="密码" prop="password">
+  //TODO:.native 修饰符:给组件添加原声事件
+  <el-form-item label="密码" prop="password" @keyup.enter.native = "submitForm">
     <el-input type="password" v-model="ruleForm.password" autocomplete="off" placeholder="请输入密码"></el-input>
   </el-form-item>
   <el-form-item >

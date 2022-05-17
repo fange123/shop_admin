@@ -291,7 +291,7 @@ export default {
       async editUser(){
         try {
           await this.$refs.editForm.validate();
-          //TODO: 提交表单项，最好精确一下提交参数，不要传多余值
+          //TODO: 提交表单项，最好精确一下提交参数，不要传多
           const {id,username,email,mobile} = this.editForm;
         const res =  await this.$axios.put(`/users/${id}`,{
           username,email,mobile
@@ -320,10 +320,7 @@ export default {
 };
 </script>
 <style lang="less" scoped>
-.el-breadcrumb {
-  height:40px;
-  line-height: 40px;
-}
+
 .input_wrap {
   margin:10px 0;
   .el-input {

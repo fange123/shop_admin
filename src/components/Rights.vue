@@ -9,6 +9,11 @@
       <el-table
       :data="rightsList">
       <el-table-column
+      label="#"
+      width="50"
+      type="index" >
+      </el-table-column>
+      <el-table-column
         prop="authName"
         label="权限名称">
       </el-table-column>

@@ -12,6 +12,13 @@
 html,body,#app {
   width:100%;
   height:100%;
+  .el-breadcrumb {
+    height:40px;
+    line-height: 40px;
+    background-color:#a4a6a6;
+    padding:0 10px;
+
+}
 }
 
 

@@ -6,6 +6,28 @@
     <el-breadcrumb-item>权限管理</el-breadcrumb-item>
     <el-breadcrumb-item>权限列表</el-breadcrumb-item>
   </el-breadcrumb>
+      <el-table
+      :data="rightsList">
+      <el-table-column
+        prop="authName"
+        label="权限名称">
+      </el-table-column>
+      <el-table-column
+        prop="path"
+        label="路径">
+      </el-table-column>
+      <el-table-column
+        label="权限等级">
+       <template v-slot:default="{row:{level}}">
+       <!-- # 自定义插槽，可以用三目运算符，也可以用v-if语句 -->
+       <!-- {{+level === 0?'一级':(+level === 2 ? '二级':'三级')}} -->
+       <span v-if="+level === 0">一级</span>
+       <span v-else-if="+level === 1">二级</span>
+       <span v-else>三级</span>
+
+       </template>
+      </el-table-column>
+    </el-table>
 
 </div>
 </template>

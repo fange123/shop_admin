@@ -3,6 +3,7 @@ import VueRouter from "vue-router";
 import Login from "../components/Login.vue";
 import Index from "../components/Index.vue";
 import Users from "../components/Users.vue";
+import Rights from "../components/Rights.vue";
 
 Vue.use(VueRouter);
 
@@ -21,6 +22,11 @@ const routes = [
         path: "users",
         name: "users",
         component: Users,
+      },
+      {
+        path: "rights",
+        name: "rights",
+        component: Rights,
       },
     ],
   },

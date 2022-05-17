@@ -4,6 +4,7 @@ import Login from "../components/Login.vue";
 import Index from "../components/Index.vue";
 import Users from "../components/Users.vue";
 import Rights from "../components/Rights.vue";
+import Roles from "../components/Roles.vue";
 
 Vue.use(VueRouter);
 
@@ -22,6 +23,11 @@ const routes = [
         path: "users",
         name: "users",
         component: Users,
+      },
+      {
+        path: "roles",
+        name: "roles",
+        component: Roles,
       },
       {
         path: "rights",

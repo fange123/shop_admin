@@ -49,7 +49,7 @@
         label="描述">
        <template v-slot:default="{row}">
         <el-button type="primary" plain circle size='small' icon='el-icon-edit'/>
-        <el-button type="danger" plain circle size='small' icon='el-icon-delete'/>
+        <el-button type="danger" plain circle size='small' icon='el-icon-delete' @click='delRight(row)'/>
         <el-button type="success" plain round  size='small' icon='el-icon-check' @click="showDialog(row)">分配权限</el-button>
        </template>
       </el-table-column>
@@ -173,6 +173,18 @@ export default {
         }
 
        }catch(e) {}
+
+      },
+      async delRight(row){
+        try {
+        await this.$confirm('确定删除吗','确定',{type:"warning"});
+        //TODO: 发送删除的ajax请求。。。
+
+
+        }catch(e){
+          this.$message.info('取消删除');
+
+        }
 
       },
       showDialog(row){

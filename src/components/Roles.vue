@@ -6,6 +6,10 @@
       <el-breadcrumb-item>权限管理</el-breadcrumb-item>
       <el-breadcrumb-item>角色列表</el-breadcrumb-item>
   </el-breadcrumb>
+  <div class="search_wrap">
+    <el-button type="success" plain @click="addDialog">添加角色</el-button>
+
+  </div>
   <el-table :data="rolesList">
       <el-table-column
       type="expand" class="expand">
@@ -48,7 +52,7 @@
       <el-table-column
         label="描述">
        <template v-slot:default="{row}">
-        <el-button type="primary" plain circle size='small' icon='el-icon-edit'/>
+        <el-button type="primary" plain circle size='small' icon='el-icon-edit' @click='editVisible(row)'/>
         <el-button type="danger" plain circle size='small' icon='el-icon-delete' @click='delRight(row,$event)'/>
         <el-button type="success" plain round  size='small' icon='el-icon-check' @click="showDialog(row)">分配权限</el-button>
        </template>
@@ -71,6 +75,24 @@
       </span>
     </el-dialog>
 
+    <el-dialog
+      title="添加"
+      :visible.sync="addVisible"
+      width="40%">
+      <el-form :model="form" label-width="80px" :rules="rules" ref="form">
+      <el-form-item label="角色名称" prop="roleName" >
+        <el-input v-model="form.roleName" placeholder="请输入角色名称"></el-input>
+      </el-form-item>
+      <el-form-item label="角色描述" prop="roleDesc" >
+        <el-input v-model="form.roleDesc" placeholder="请输角色描述"></el-input>
+      </el-form-item>
+      </el-form>
+      <span slot="footer" class="dialog-footer">
+        <el-button @click="addVisible = false">取 消</el-button>
+        <el-button type="primary" >确 定</el-button>
+      </span>
+    </el-dialog>
+
   </div>
 
 </template>
@@ -84,12 +106,26 @@ export default {
         return {
           rolesList:[],
           assignVisible:false,
+          addVisible:false,
            data: [],
         defaultProps: {
           children: 'children',
           label: 'authName'
         },
-        roleId:''
+        form:{
+          roleName:'',
+          roleDesc:''
+        },
+        roleId:'',
+        rules:{
+          roleName:[
+            { required: true,message:'角色名称不能为空',trigger:['change','blur']}
+           ],
+          roleDesc:[
+            { required: true,message:'角色描述不能为空',trigger:['change','blur']}
+           ],
+
+        }
 
 
         };
@@ -201,7 +237,22 @@ export default {
         this.assignVisible = true;
         this.getRolesTree(row);
         this.roleId = row.id;
-      }
+      },
+      addDialog(){
+        this.addVisible = true;
+        this.$nextTick(()=>{ this.$refs.form.resetFields(); });
+
+      },
+      editVisible(row){
+        this.addVisible = true;
+        const {roleName,roleDesc,id } = row;
+        this.$nextTick(()=> {
+          this.form.roleDesc = roleDesc;
+        this.form.roleName = roleName;
+        });
+
+      },
+
     },
     //生命周期 - 挂载完成（访问DOM元素）
     mounted() {
@@ -211,6 +262,9 @@ export default {
 </script>
 <style lang="less" scoped>
 /* @import url(); 引入css类 */
+.search_wrap {
+  margin: 5px 0;
+}
 
 .l1 {
   padding:20px 0 0 20px;

@@ -49,7 +49,7 @@
         label="描述">
        <template v-slot:default="{row}">
         <el-button type="primary" plain circle size='small' icon='el-icon-edit'/>
-        <el-button type="danger" plain circle size='small' icon='el-icon-delete' @click='delRight(row)'/>
+        <el-button type="danger" plain circle size='small' icon='el-icon-delete' @click='delRight(row,$event)'/>
         <el-button type="success" plain round  size='small' icon='el-icon-check' @click="showDialog(row)">分配权限</el-button>
        </template>
       </el-table-column>
@@ -175,7 +175,8 @@ export default {
        }catch(e) {}
 
       },
-      async delRight(row){
+      async delRight(row,e){
+
         try {
         await this.$confirm('确定删除吗','确定',{type:"warning"});
         //TODO: 发送删除的ajax请求。。。
@@ -183,6 +184,15 @@ export default {
 
         }catch(e){
           this.$message.info('取消删除');
+
+        }finally{
+        //TODO:解决elementUI失焦bug,icon-delete,外面是button,里面是i
+        if(e.target.nodeName ==='I'){
+          e.target.parentNode.blur();
+
+        }else{
+          e.target.blur();
+        }
 
         }
 

@@ -216,38 +216,104 @@
       "status": 200
     }
   },
-  "rightsTree": [
-    {
-      "data": [
-        {
-          "id": 101,
-          "authName": "商品管理",
-          "path": null,
-          "pid": 0,
-          "children": [
-            {
-              "id": 104,
-              "authName": "商品列表",
-              "path": null,
-              "pid": 101,
-              "children": [
-                {
-                  "id": 105,
-                  "authName": "添加商品",
-                  "path": null,
-                  "pid": "104,101"
-                }
-              ]
-            }
-          ]
-        }
-      ],
-      "meta": {
-        "msg": "获取权限列表成功",
-        "status": 200
+  "rightsTree": {
+    "data": [
+      {
+        "id": 101,
+        "authName": "商品管理",
+        "path": null,
+        "pid": 0,
+        "children": [
+          {
+            "id": 104,
+            "authName": "商品列表",
+            "path": null,
+            "pid": 101,
+            "children": [
+              {
+                "id": 105,
+                "authName": "添加商品",
+                "path": null,
+                "pid": "104,101"
+              },
+              {
+                "id": 1055,
+                "authName": "删除商品",
+                "path": null,
+                "pid": "104,101"
+              },
+              {
+                "id": 1056,
+                "authName": "预售商品",
+                "path": null,
+                "pid": "104,101",
+                "children": [
+                  {
+                    "id": 1015,
+                    "authName": "购买商品",
+                    "path": null,
+                    "pid": "104,101"
+                  },
+                  {
+                    "id": 1025,
+                    "authName": "赠送商品",
+                    "path": null,
+                    "pid": "104,101"
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "id": 1041,
+            "authName": "商品订单",
+            "path": null,
+            "pid": 1011,
+            "children": [
+              {
+                "id": 2105,
+                "authName": "添加订单",
+                "path": null,
+                "pid": "104,101"
+              },
+              {
+                "id": 2055,
+                "authName": "删除订单",
+                "path": null,
+                "pid": "104,101",
+                "children": [
+                  {
+                    "id": 3056,
+                    "authName": "预售订单",
+                    "path": null,
+                    "pid": "104,101",
+                    "children": [
+                      {
+                        "id": 4015,
+                        "authName": "购买订单",
+                        "path": null,
+                        "pid": "104,101"
+                      },
+                      {
+                        "id": 5025,
+                        "authName": "赠送订单",
+                        "path": null,
+                        "pid": "104,101"
+                      }
+                    ]
+                  }
+                ]
+              }
+            ]
+          }
+        ]
       }
+    ],
+    "meta": {
+      "msg": "获取权限列表成功",
+      "status": 200
     }
-  ],
+  },
   "roles": {
     "data": [
       {
@@ -261,7 +327,7 @@
             "path": null,
             "children": [
               {
-                "id": 104,
+                "id": 1041,
                 "authName": "商品列表",
                 "path": null,
                 "children": [
@@ -307,7 +373,7 @@
                 "path": null,
                 "children": [
                   {
-                    "id": 1005,
+                    "id": 5025,
                     "authName": "订单删除",
                     "path": null
                   }

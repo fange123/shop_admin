@@ -76,10 +76,10 @@
     </el-dialog>
 
     <el-dialog
-      title="添加"
+      :title="type"
       :visible.sync="addVisible"
       width="40%">
-      <el-form :model="form" label-width="80px" :rules="rules" ref="form">
+      <el-form :model="form" label-width="80px" :rules="rules" ref="form" status-icon>
       <el-form-item label="角色名称" prop="roleName" >
         <el-input v-model="form.roleName" placeholder="请输入角色名称"></el-input>
       </el-form-item>
@@ -89,7 +89,7 @@
       </el-form>
       <span slot="footer" class="dialog-footer">
         <el-button @click="addVisible = false">取 消</el-button>
-        <el-button type="primary" >确 定</el-button>
+        <el-button type="primary" @click="handleSubmit">确 定</el-button>
       </span>
     </el-dialog>
 
@@ -104,6 +104,7 @@ export default {
     name:'Roles',
     data() {
         return {
+          type:'',
           rolesList:[],
           assignVisible:false,
           addVisible:false,
@@ -241,10 +242,12 @@ export default {
       addDialog(){
         this.addVisible = true;
         this.$nextTick(()=>{ this.$refs.form.resetFields(); });
+        this.type = '添加';
 
       },
       editVisible(row){
         this.addVisible = true;
+        this.type = '编辑';
         const {roleName,roleDesc,id } = row;
         this.$nextTick(()=> {
           this.form.roleDesc = roleDesc;
@@ -252,8 +255,20 @@ export default {
         });
 
       },
+      async handleSubmit(){
+       try {
+          await this.$refs.form.validate();
+        //TODO:添加或者编辑的ajax
+        this.$message.success('操作成功');
+        this.$refs.form.resetFields();
+        this.addVisible = false;
+
+       }catch(e){}
+
+      }
 
     },
+
     //生命周期 - 挂载完成（访问DOM元素）
     mounted() {
 

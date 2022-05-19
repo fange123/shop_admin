@@ -411,5 +411,83 @@
       "msg": "更新成功",
       "status": 200
     }
+  },
+  "categories": {
+    "result": {
+      "data": [
+        {
+          "cat_id": 1,
+          "cat_name": "家电",
+          "cat_pid": 0,
+          "cat_delete": false,
+          "cat_level": 1,
+          "children": [
+            {
+              "cat_id": 11,
+              "cat_name": "手机相机",
+              "cat_pid": 0,
+              "cat_level": 2,
+              "children": [
+                {
+                  "cat_id": 3,
+                  "cat_name": "美颜相机",
+                  "cat_pid": 0,
+                  "cat_level": 3
+                },
+                {
+                  "cat_id": 4,
+                  "cat_name": "轻颜相机",
+                  "cat_pid": 0,
+                  "cat_level": 3
+                },
+                {
+                  "cat_id": 6,
+                  "cat_name": "美图秀秀",
+                  "cat_pid": 0,
+                  "cat_level": 3
+                }
+              ]
+            },
+            {
+              "cat_id": 12,
+              "cat_name": "电脑办公",
+              "cat_pid": 0,
+              "cat_level": 2,
+              "children": [
+                {
+                  "cat_id": 9,
+                  "cat_name": "联想电脑",
+                  "cat_pid": 0,
+                  "cat_level": 3
+                },
+                {
+                  "cat_id": 19,
+                  "cat_name": "惠普电脑",
+                  "cat_pid": 0,
+                  "cat_level": 3
+                },
+                {
+                  "cat_id": 29,
+                  "cat_name": "华为电脑",
+                  "cat_pid": 0,
+                  "cat_level": 3
+                },
+                {
+                  "cat_id": 39,
+                  "cat_name": "苹果电脑",
+                  "cat_pid": 0,
+                  "cat_level": 3
+                }
+              ]
+            }
+          ]
+        }
+      ],
+      "total": 10
+    },
+    "meta": {
+      "msg": "更新成功",
+      "status": 200
+    }
   }
 }

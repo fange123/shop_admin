@@ -365,7 +365,7 @@ export default {
         //TODO:根据用户Id查回显的角色id
        try {
           const {data,meta:{status}} = await this.$axios.get('/usersInfo',{
-            id
+            params:{id}
           });
         if(status === 200){
           this.assignForm.rid = data.role_id;

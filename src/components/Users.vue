@@ -43,10 +43,10 @@
         label="创建时间">
       </el-table-column>
       <el-table-column label="操作" width="300">
-         <template v-slot:default="scope">
-           <el-button type="primary" plain icon="el-icon-edit" circle size="small" @click="showEdit(scope.row)"></el-button>
-           <el-button type="danger" plain icon="el-icon-delete" circle size="small" @click="delUser(scope.row.id)"></el-button>
-            <el-button type="success" plain icon="el-icon-check" round size="small">分配角色</el-button>
+         <template v-slot:default="{row}">
+           <el-button type="primary" plain icon="el-icon-edit" circle size="small" @click="showEdit(row)"></el-button>
+           <el-button type="danger" plain icon="el-icon-delete" circle size="small" @click="delUser(row.id)"></el-button>
+            <el-button type="success" plain icon="el-icon-check" round size="small" @click="showAssign(row)">分配角色</el-button>
 
 
          </template>
@@ -110,11 +110,34 @@
         <el-button type="primary" @click="addUser">确 定</el-button>
       </span>
     </el-dialog>
+    <el-dialog title="分配角色" :visible.sync="assignVisible" width="40%">
+      <el-form label-width="80px" :model="assignForm">
+        <el-form-item label="用户名" >
+          <el-tag type="info">{{assignForm.username}}</el-tag>
+        </el-form-item>
+
+        <el-form-item label="角色列表">
+         <el-select v-model="assignForm.rid" placeholder="请选择">
+            <el-option
+              v-for="item in roleList"
+              :key="item.id"
+              :label="item.roleName"
+              :value="item.id">
+            </el-option>
+          </el-select>
+        </el-form-item>
+      </el-form>
+      <span slot="footer" class="dialog-footer">
+        <el-button @click="assignVisible = false">取 消</el-button>
+        <el-button type="primary" @click="assignRole">确 定</el-button>
+      </span>
+    </el-dialog>
 
   </div>
 </template>
 
 <script>
+
 
 export default {
     name:'Users',
@@ -127,6 +150,7 @@ export default {
           total:0,
           addVisible:false,
           editVisible:false,
+          assignVisible:false,
           form:{
             username:'',
             password:'',
@@ -139,6 +163,13 @@ export default {
             email:'',
             mobile:''
           },
+          assignForm:{
+            rid:'',
+            id:'',
+            username:'',
+
+          },
+          roleList:[],
               rules: {
                  password: [
                   { required: true, message: '请输入密码', trigger: ['blur','change'] },
@@ -308,6 +339,53 @@ export default {
         }catch(e){
           console.log(e);
         }
+
+       },
+       showAssign(row){
+         this.assignVisible = true;
+         this.assignForm.username = row.username;
+         this.assignForm.id = row.id;
+         this.getUserInfoById(row.id);
+         this.getRolesList();
+       },
+      async getRolesList(){
+       try {
+          const {data,meta:{status}} = await this.$axios.get('/roles');
+        if(status === 200){
+          this.roleList = data;
+
+        }else{
+           this.$message.error('获取失败');
+        }
+
+       }catch(e){}
+
+       },
+      async getUserInfoById(id){
+        //TODO:根据用户Id查回显的角色id
+       try {
+          const {data,meta:{status}} = await this.$axios.get('/usersInfo',{
+            id
+          });
+        if(status === 200){
+          this.assignForm.rid = data.role_id;
+
+        }else{
+           this.$message.error('获取失败');
+        }
+
+       }catch(e){}
+
+       },
+       assignRole(){
+         //TODO:表单校验
+         //发送ajax请求
+         console.log(this.assignForm);
+         //假设成功
+         this.assignVisible = false;
+         this.$message.success('分配成功');
+         //重新渲染列表
+
 
        }
 

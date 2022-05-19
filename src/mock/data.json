@@ -382,10 +382,33 @@
             ]
           }
         ]
+      },
+      {
+        "id": 130,
+        "roleName": "程序员",
+        "roleDesc": "前端开发人员"
+      },
+      {
+        "id": 120,
+        "roleName": "产品经理",
+        "roleDesc": "产品经理"
       }
     ],
     "meta": {
       "msg": "获取成功",
+      "status": 200
+    }
+  },
+  "usersInfo": {
+    "data": {
+      "id": 503,
+      "username": "admin3",
+      "role_id": 130,
+      "mobile": "00000",
+      "email": "new@new.com"
+    },
+    "meta": {
+      "msg": "更新成功",
       "status": 200
     }
   }

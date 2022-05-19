@@ -22,6 +22,7 @@
             active-text-color="#ffd04b"
             unique-opened
             router
+            :default-active="activeIndex"
           >
           <el-submenu index="1">
             <template v-slot:title>
@@ -49,6 +50,25 @@
             </el-menu-item>
 
           </el-submenu>
+          <el-submenu index="3">
+            <template v-slot:title>
+              <i class="el-icon-location"></i>
+              <span>商品管理</span>
+            </template>
+            <el-menu-item index="list">
+                <i class="el-icon-menu"></i>
+                <span slot="title">商品列表</span>
+            </el-menu-item>
+            <el-menu-item index="params">
+                <i class="el-icon-menu"></i>
+                <span slot="title">分类参数</span>
+            </el-menu-item>
+            <el-menu-item index="classical">
+                <i class="el-icon-menu"></i>
+                <span slot="title">商品分类</span>
+            </el-menu-item>
+
+          </el-submenu>
           </el-menu>
         </el-aside>
         <el-main>
@@ -66,8 +86,15 @@ export default {
 
         };
     },
+    computed:{
+      //TODO:根据路径让菜单高亮
+      activeIndex(){
+        return this.$route.path.slice(1);
+      }
+    },
     //生命周期 - 创建完成（访问当前this实例）
     created() {
+
 
     },
     //生命周期 - 挂载完成（访问DOM元素）

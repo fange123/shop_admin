@@ -489,5 +489,55 @@
       "msg": "更新成功",
       "status": 200
     }
+  },
+  "categoriesType2": {
+    "data": [
+      {
+        "cat_id": 1,
+        "cat_name": "家电",
+        "cat_pid": 0,
+        "cat_delete": false,
+        "cat_level": 1,
+        "children": [
+          {
+            "cat_id": 11,
+            "cat_name": "手机相机",
+            "cat_pid": 1,
+            "cat_level": 2
+          },
+          {
+            "cat_id": 12,
+            "cat_name": "电脑办公",
+            "cat_pid": 3,
+            "cat_level": 2
+          }
+        ]
+      },
+      {
+        "cat_id": 2,
+        "cat_name": "水果",
+        "cat_pid": 2,
+        "cat_delete": false,
+        "cat_level": 1,
+        "children": [
+          {
+            "cat_id": 31,
+            "cat_name": "热带水果",
+            "cat_pid": 3,
+            "cat_level": 2
+          },
+          {
+            "cat_id": 92,
+            "cat_name": "柑橘类",
+            "cat_pid": 4,
+            "cat_level": 2
+          }
+        ]
+      }
+    ],
+    "meta": {
+      "msg": "更新成功",
+      "status": 200
+    }
   }
 }

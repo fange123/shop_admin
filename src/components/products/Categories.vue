@@ -3,7 +3,9 @@
 <div class="categories">
   <el-button type="success" plain>添加分类</el-button>
   <el-table
-  row-key="cat_id"
+      v-loading="loading"
+      element-loading-text="拼命加载中~~~~"
+      row-key="cat_id"
       :data="categoryList"
       style="width: 100%">
       <el-table-column
@@ -43,7 +45,8 @@ export default {
           categoryList:[],
           pageSize:1,
           pageNum:10,
-          total:1
+          total:1,
+          loading:true,
 
         };
     },
@@ -54,6 +57,7 @@ export default {
     },
     methods: {
       async getCategoryList(){
+        this.loading = true;
         const {result,meta:{status}} = await this.$axios.get('/categories',{
           type:3,
           pageNum:this.pageNum,
@@ -63,6 +67,13 @@ export default {
           this.categoryList = result.data;
           this.total = result.total;
         }
+
+        // TODO:假装数据量大，服务器返回时间有一点长
+        setTimeout(() =>{
+          this.loading = false;
+
+        },1000);
+
       }
     },
     //生命周期 - 挂载完成（访问DOM元素）

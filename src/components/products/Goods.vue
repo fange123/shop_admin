@@ -9,6 +9,7 @@
 >
       <el-table-column
         type="index"
+        :index="indexMethod"
         label="#"
         width="50">
       </el-table-column>
@@ -49,6 +50,7 @@
         </template>
       </el-table-column>
     </el-table>
+    <!-- 分页 -->
 
 
 </div>
@@ -61,6 +63,9 @@ export default {
         return {
           goodsList:[],
           loading:false,
+          total:10,
+          pageNum:1,
+          pageSize:10
 
         };
     },
@@ -88,6 +93,10 @@ export default {
         }
         this.loading = false;
        }catch(e){}
+      },
+      indexMethod(index){
+        //TODO:下标应该是当前下标加上一页的页数*每页的数量
+        return index+1 + (this.pageNum-1)*this.pageSize;
       }
     },
     //生命周期 - 挂载完成（访问DOM元素）

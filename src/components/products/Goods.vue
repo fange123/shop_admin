@@ -1,6 +1,6 @@
 <template>
 <div class="goods">
-<el-button type="success" plain>添加商品</el-button>
+<el-button type="success" plain @click="goAdd">添加商品</el-button>
 <el-table
   v-loading="loading"
   element-loading-text="拼命加载中~~~~"
@@ -97,6 +97,9 @@ export default {
       indexMethod(index){
         //TODO:下标应该是当前下标加上一页的页数*每页的数量
         return index+1 + (this.pageNum-1)*this.pageSize;
+      },
+      goAdd(){
+        this.$router.push('/list-add');
       }
     },
     //生命周期 - 挂载完成（访问DOM元素）

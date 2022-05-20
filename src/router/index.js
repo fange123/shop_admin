@@ -7,6 +7,7 @@ import Rights from "../components/rights/Rights.vue";
 import Roles from "../components/rights/Roles.vue";
 import Categories from "../components/products/Categories.vue";
 import Goods from "../components/products/Goods.vue";
+import GoodsAdd from "../components/products/GoodsAdd.vue";
 
 Vue.use(VueRouter);
 
@@ -40,6 +41,11 @@ const routes = [
         path: "list",
         name: "list",
         component: Goods,
+      },
+      {
+        path: "list-add",
+        name: "list-add",
+        component: GoodsAdd,
       },
       {
         path: "classical",

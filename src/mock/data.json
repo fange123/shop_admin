@@ -539,5 +539,53 @@
       "msg": "更新成功",
       "status": 200
     }
+  },
+  "goods": {
+    "data": {
+      "total": 50,
+      "pagenum": "1",
+      "goods": [
+        {
+          "goods_id": 144,
+          "goods_name": "OPPO手机",
+          "goods_price": 2344,
+          "goods_number": 1555,
+          "goods_weight": 15,
+          "goods_state": null,
+          "add_time": 1518884923,
+          "upd_time": 1512954923,
+          "hot_mumber": 0,
+          "is_promote": false
+        },
+        {
+          "goods_id": 124,
+          "goods_name": "联想电脑",
+          "goods_price": 13444,
+          "goods_number": 331,
+          "goods_weight": 11,
+          "goods_state": null,
+          "add_time": 1512966623,
+          "upd_time": 1512954923,
+          "hot_mumber": 0,
+          "is_promote": false
+        },
+        {
+          "goods_id": 174,
+          "goods_name": "豆豆鞋",
+          "goods_price": 7000,
+          "goods_number": 144,
+          "goods_weight": 5,
+          "goods_state": null,
+          "add_time": 1512954555,
+          "upd_time": 1512954923,
+          "hot_mumber": 0,
+          "is_promote": false
+        }
+      ]
+    },
+    "meta": {
+      "msg": "获取成功",
+      "status": 200
+    }
   }
 }

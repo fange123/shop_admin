@@ -8,6 +8,11 @@
   style="width: 100%"
 >
       <el-table-column
+        type="index"
+        label="#"
+        width="50">
+      </el-table-column>
+      <el-table-column
         prop="goods_name"
         label="商品名称"
         width="180">
@@ -16,9 +21,6 @@
         prop="goods_price"
         label="商品价格"
         width="180">
-        <template v-slot:default="scope">
-        <span>{{scope.cat_delete ? '无效':'有效'}}</span>
-        </template>
       </el-table-column>
       <el-table-column
         prop="goods_number"
@@ -31,7 +33,11 @@
       <el-table-column
         label="添加时间">
         <template v-slot="{row}">
-        {{new Date(row.add_time)}}
+
+        <!-- TODO:过滤器用在差值表达式里面 -->
+        {{
+          row.add_time | dateFilter
+        }}
         </template>
       </el-table-column>
       <el-table-column

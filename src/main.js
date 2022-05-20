@@ -4,10 +4,16 @@ import router from "./router";
 import ElementUI from "element-ui";
 import axios from "axios";
 import "element-ui/lib/theme-chalk/index.css";
+import moment from "moment";
 
 Vue.config.productionTip = false;
 Vue.use(ElementUI);
 
+// * 注册一个全局过滤器，用来过滤时间戳
+Vue.filter(
+  "dateFilter",
+  (value) => moment(value * 1000).format("YYYY-MM-DD HH:mm:ss") //value*1000是数据的问题，返回的时间戳 是秒的不是毫秒的
+);
 // # 把axios挂载到vue原型上
 Vue.prototype.$axios = axios;
 axios.defaults.baseURL = "http://localhost:3000";

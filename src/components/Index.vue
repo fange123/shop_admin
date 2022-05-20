@@ -89,7 +89,7 @@ export default {
     computed:{
       //TODO:根据路径让菜单高亮
       activeIndex(){
-        return this.$route.path.slice(1);
+        return this.$route.path.slice(1).split('-')[0];
       }
     },
     //生命周期 - 创建完成（访问当前this实例）

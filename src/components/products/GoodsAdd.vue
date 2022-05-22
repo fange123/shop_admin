@@ -70,7 +70,17 @@
       <el-button type="primary" @click="next" style="marginTop:20px">下一步</el-button>
 
     </el-tab-pane>
-    <el-tab-pane label="商品内容" name="2">角色管理</el-tab-pane>
+    <el-tab-pane label="商品内容" name="2">
+      <!-- # 富文本编辑器  基于vue的插件
+        http://doc.quilljs.cn/1434140
+
+       -->
+      <quill-editor
+        v-model="form.goods_introduce"
+      >
+      </quill-editor>
+
+    </el-tab-pane>
   </el-tabs>
 
 
@@ -190,7 +200,21 @@ export default {
     }
 };
 </script>
+<!-- # 让插件中的子类生效：1，去掉scoped，2，再写一个style不加scoped,3，使用下面的深度作用选择器 -->
 <style lang="less" scoped>
-/* @import url(); 引入css类 */
+//!:https://vue-loader.vuejs.org/zh/guide/scoped-css.html#%E5%AD%90%E7%BB%84%E4%BB%B6%E7%9A%84%E6%A0%B9%E5%85%83%E7%B4%A0
+//>>>是css语法
+// /deep/是less语法
+// ::v-deep是scss语法
+
+.quill-editor {
+  background-color: #fff;
+
+  /deep/ .ql-editor {
+    height:300px
+  }
+
+
+}
 
 </style>

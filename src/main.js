@@ -5,9 +5,16 @@ import ElementUI from "element-ui";
 import axios from "axios";
 import "element-ui/lib/theme-chalk/index.css";
 import moment from "moment";
+import VueQuillEditor from "vue-quill-editor";
+
+// require styles
+import "quill/dist/quill.core.css";
+import "quill/dist/quill.snow.css";
+import "quill/dist/quill.bubble.css";
 
 Vue.config.productionTip = false;
 Vue.use(ElementUI);
+Vue.use(VueQuillEditor);
 
 // * 注册一个全局过滤器，用来过滤时间戳
 Vue.filter(

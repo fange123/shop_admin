@@ -79,6 +79,7 @@
         v-model="form.goods_introduce"
       >
       </quill-editor>
+           <el-button type="primary" @click="addGood" style="marginTop:20px">添加商品</el-button>
 
     </el-tab-pane>
   </el-tabs>
@@ -183,6 +184,15 @@ export default {
         fileList.splice(ids, 1);
 
       },
+      async addGood(){
+        const res= await this.$axios.post('/addGoods',{
+          ...this.form,
+          // 要求商品分类以字符串格式发送
+          goods_cat:this.form.goods_cat.join()
+        });
+        //TODO: 成功以后的功能
+
+      }
     },
     //生命周期 - 创建完成（访问当前this实例）
     async created() {

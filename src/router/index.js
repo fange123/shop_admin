@@ -1,13 +1,15 @@
 import Vue from "vue";
 import VueRouter from "vue-router";
-import Login from "../components/Login.vue";
-import Index from "../components/Index.vue";
-import Users from "../components/users/Users.vue";
-import Rights from "../components/rights/Rights.vue";
-import Roles from "../components/rights/Roles.vue";
-import Categories from "../components/products/Categories.vue";
-import Goods from "../components/products/Goods.vue";
-import GoodsAdd from "../components/products/GoodsAdd.vue";
+
+//todo:代码优化，异步组件，实现按需加载
+const Login = () => import("../components/Login.vue");
+const Index = () => import("../components/Index.vue");
+const Users = () => import("../components/users/Users.vue");
+const Rights = () => import("../components/rights/Rights.vue");
+const Roles = () => import("../components/rights/Roles.vue");
+const Categories = () => import("../components/products/Categories.vue");
+const Goods = () => import("../components/products/Goods.vue");
+const GoodsAdd = () => import("../components/products/GoodsAdd.vue");
 
 Vue.use(VueRouter);
 

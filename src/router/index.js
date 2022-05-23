@@ -2,14 +2,27 @@ import Vue from "vue";
 import VueRouter from "vue-router";
 
 //todo:代码优化，异步组件，实现按需加载
-const Login = () => import("../components/Login.vue");
-const Index = () => import("../components/Index.vue");
-const Users = () => import("../components/users/Users.vue");
-const Rights = () => import("../components/rights/Rights.vue");
-const Roles = () => import("../components/rights/Roles.vue");
-const Categories = () => import("../components/products/Categories.vue");
-const Goods = () => import("../components/products/Goods.vue");
-const GoodsAdd = () => import("../components/products/GoodsAdd.vue");
+
+//# 指定了相同的webpackChunkName，会合并打包成一个js文件
+//# 不加 webpackChunkName的话，每个组件都打包成一个js文件，有之后，name名称相同的一组组件打包为一个js文件
+const Login = () =>
+  import(/* webpackChunkName: 'index' */ "../components/Login.vue");
+const Index = () =>
+  import(/* webpackChunkName: 'index' */ "../components/Index.vue");
+const Users = () =>
+  import(/* webpackChunkName: 'users' */ "../components/users/Users.vue");
+const Rights = () =>
+  import(/* webpackChunkName: 'rights' */ "../components/rights/Rights.vue");
+const Roles = () =>
+  import(/* webpackChunkName: 'rights' */ "../components/rights/Roles.vue");
+const Categories = () =>
+  import(
+    /* webpackChunkName: 'goods' */ "../components/products/Categories.vue"
+  );
+const Goods = () =>
+  import(/* webpackChunkName: 'goods' */ "../components/products/Goods.vue");
+const GoodsAdd = () =>
+  import(/* webpackChunkName: 'goods' */ "../components/products/GoodsAdd.vue");
 
 Vue.use(VueRouter);
 

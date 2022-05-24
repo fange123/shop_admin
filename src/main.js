@@ -23,7 +23,7 @@ Vue.filter(
 );
 // # 把axios挂载到vue原型上
 Vue.prototype.$axios = axios;
-axios.defaults.baseURL = "http://localhost:3000";
+axios.defaults.baseURL = "/api";
 //!:全局请求头的token不能这样配置，它是不会变的
 // axios.defaults.headers.common["Authorization"] = AUTH_TOKEN;
 
